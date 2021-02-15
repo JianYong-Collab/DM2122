@@ -8,7 +8,6 @@ Matrix Stack to replace openGL math function
 */
 /******************************************************************************/
 #include "MatrixStack.h"
-
 /******************************************************************************/
 /*!
 \brief
@@ -34,7 +33,6 @@ MS::~MS() {
 /*!
 \brief
 Return the top matrix on the matrix stack
-
 \return
 	A copy of the top matrix
 */
@@ -70,7 +68,7 @@ Clear the matrix stack
 */
 /******************************************************************************/
 void MS::Clear() {
-	while(ms.size() > 1)
+	while (ms.size() > 1)
 		ms.pop();
 }
 
@@ -90,12 +88,11 @@ void MS::LoadIdentity() {
 /*!
 \brief
 Return the top matrix with a new matrix
-
 \param matrix
 	The new matrix to replace the top
 */
 /******************************************************************************/
-void MS::LoadMatrix(const Mtx44 &matrix) {
+void MS::LoadMatrix(const Mtx44& matrix) {
 	ms.top() = matrix;
 }
 
@@ -103,12 +100,11 @@ void MS::LoadMatrix(const Mtx44 &matrix) {
 /*!
 \brief
 Multiply the top matrix with a new matrix
-
 \param matrix
 	The new matrix to replace the top
 */
 /******************************************************************************/
-void MS::MultMatrix(const Mtx44 &matrix) {
+void MS::MultMatrix(const Mtx44& matrix) {
 	ms.top() = ms.top() * matrix;
 }
 
@@ -116,7 +112,6 @@ void MS::MultMatrix(const Mtx44 &matrix) {
 /*!
 \brief
 Multiply the top matrix with a rotation matrix based on the following parameters
-
 \param	degrees
 	Angle of rotation, in degrees, clockwise
 \param	axisX
@@ -137,7 +132,6 @@ void MS::Rotate(float degrees, float axisX, float axisY, float axisZ) {
 /*!
 \brief
 Multiply the top matrix with a scale matrix based on the following parameters
-
 \param	scaleX
 	Factor to scale along x-axis
 \param	scaleY
@@ -155,9 +149,8 @@ void MS::Scale(float scaleX, float scaleY, float scaleZ) {
 /******************************************************************************/
 /*!
 \brief
-Multiply the top matrix with a translation matrix based on the following 
+Multiply the top matrix with a translation matrix based on the following
 parameters
-
 \param	translateX
 	Offset along x-axis
 \param	scaleY
@@ -176,15 +169,14 @@ void MS::Translate(float translateX, float translateY, float translateZ) {
 /*!
 \brief
 Setup frustum matrix and push to matrix stack
-
 \param left
-	Frustum - left 
+	Frustum - left
 \param right
-	Frustum - right 
+	Frustum - right
 \param bottom
-	Frustum - bottom 
+	Frustum - bottom
 \param top
-	Frustum - top 
+	Frustum - top
 \param near
 	Frustum - front
 \param far
@@ -193,14 +185,13 @@ Setup frustum matrix and push to matrix stack
 /******************************************************************************/
 void MS::Frustum(double left, double right, double bottom, double top, double near, double far) {
 	Mtx44 mat;
-	mat.SetToFrustum(left, right, bottom, top, near, far);
+	mat.SetToFrustum(left,right,bottom,top,near,far);
 	ms.top() = ms.top() * mat;
 }
 
 /******************************************************************************/
 /*!
 \brief Setup lookat matrix and push to matrix stack
-
 \param eyeX
 	eye vector x value
 \param eyeY
@@ -222,8 +213,8 @@ void MS::Frustum(double left, double right, double bottom, double top, double ne
 */
 /******************************************************************************/
 void MS::LookAt(double eyeX, double eyeY, double eyeZ,
-				double centerX, double centerY, double centerZ,
-				double upX, double upY, double upZ)
+	double centerX, double centerY, double centerZ,
+	double upX, double upY, double upZ)
 {
 	Mtx44 mat;
 	mat.SetToLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
